@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cp \"C:/Users/shiva/Downloads/Screenshot_1777209555.png\" \"C:/Users/shiva/OneDrive/Desktop/mywork/work/find-roomie-landing-page/public/screen-splash.png\")",
+      "Bash(cp \"C:/Users/shiva/Downloads/Screenshot_1777209558.png\" \"C:/Users/shiva/OneDrive/Desktop/mywork/work/find-roomie-landing-page/public/screen-onboarding.png\")",
+      "Bash(xargs grep *)",
+      "Bash(npm run *)",
+      "Bash(curl *)",
+      "Bash(grep -o '..\\\\{20\\\\}marquee-track.\\\\{20\\\\}')",
+      "Bash(taskkill /PID 11044 /F)",
+      "Bash(taskkill /F /IM node.exe)",
+      "PowerShell(Stop-Process *)"
+    ]
+  }
+}

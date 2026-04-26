@@ -1,3 +1,4 @@
+import { AppPreview } from "./components/app-preview";
 import { Cta } from "./components/cta";
 import { Faq } from "./components/faq";
 import { FindTogether } from "./components/find-together";
@@ -14,6 +15,7 @@ export default function Home() {
       <Nav />
       <main>
         <Hero />
+        <AppPreview />
         <HowItWorks />
         <Modes />
         <FindTogether />
