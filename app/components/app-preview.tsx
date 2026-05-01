@@ -179,6 +179,14 @@ export function AppPreview() {
     if (!section) return;
 
     const handleWheel = (e: WheelEvent) => {
+      const rect = section.getBoundingClientRect();
+      // Bail if section is completely out of view
+      if (rect.bottom <= 0 || rect.top >= window.innerHeight) return;
+
+      const sectionCenter = rect.top + rect.height / 2;
+      const viewportCenter = window.innerHeight / 2;
+      const distance = sectionCenter - viewportCenter;
+
       const now = Date.now();
       if (now - lastWheelTime.current < WHEEL_COOLDOWN) {
         // Still in cooldown — block the scroll so the page doesn't jump
@@ -186,11 +194,15 @@ export function AppPreview() {
         return;
       }
 
-      const rect = section.getBoundingClientRect();
-      const sectionCenter = rect.top + rect.height / 2;
-      const viewportCenter = window.innerHeight / 2;
-      const inView = Math.abs(sectionCenter - viewportCenter) < rect.height * 0.45;
-      if (!inView) return;
+      // If section is partially visible but not centered, snap it to centre first
+      // so the user always sees the full page before the carousel takes over.
+      const CENTER_TOLERANCE = 40;
+      if (Math.abs(distance) > CENTER_TOLERANCE) {
+        e.preventDefault();
+        section.scrollIntoView({ behavior: "smooth", block: "center" });
+        lastWheelTime.current = now;
+        return;
+      }
 
       // At the boundaries, let the page scroll through naturally
       if (e.deltaY > 0 && current === SCREENS.length - 1) return;
