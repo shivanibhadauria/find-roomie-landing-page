@@ -165,17 +165,12 @@ function PhoneFrame({
           className="relative overflow-hidden rounded-[32px]"
           style={{
             width: 160,
-            height: 326,
+            height: 356,
             border: "5px solid #1a1a22",
             boxShadow:
               "0 0 0 1px rgba(255,255,255,0.08) inset, 0 32px 72px -12px rgba(17,17,26,0.32)",
           }}
         >
-          {/* notch */}
-          <div
-            className="absolute left-1/2 top-2 z-10 -translate-x-1/2 rounded-full bg-[#1a1a22]"
-            style={{ width: 56, height: 14 }}
-          />
           <Image
             src={src}
             alt={alt}
@@ -183,6 +178,11 @@ function PhoneFrame({
             className="object-cover object-top"
             sizes="160px"
             priority={priority}
+          />
+          {/* Dynamic Island */}
+          <div
+            className="absolute left-1/2 top-2 z-10 -translate-x-1/2 rounded-full bg-[#1a1a22]"
+            style={{ width: 56, height: 14 }}
           />
         </div>
       </div>
