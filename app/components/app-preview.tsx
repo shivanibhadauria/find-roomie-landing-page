@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback, useRef } from "react";
+import { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
 
 const SCREENS = [
@@ -82,7 +82,6 @@ const INTERVAL = 4000;
 // Proper aspect ratio: 1344 × 2992 → width 240 → height = 240 * 2992/1344 = 534
 const CARD_W = 240;
 const CARD_H = 534;
-const WHEEL_COOLDOWN = 600;
 
 function deckStyle(pos: number, dir: 1 | -1): React.CSSProperties {
   if (pos === 0) {
@@ -153,8 +152,6 @@ export function AppPreview() {
   const [current, setCurrent] = useState(0);
   const [paused, setPaused] = useState(false);
   const [dir, setDir] = useState<1 | -1>(1);
-  const sectionRef = useRef<HTMLElement>(null);
-  const lastWheelTime = useRef(0);
 
   const next = useCallback(() => {
     setDir(1);
@@ -173,58 +170,10 @@ export function AppPreview() {
     return () => clearInterval(id);
   }, [paused, next]);
 
-  // Scroll-to-swipe: intercept wheel events when section is centred in viewport
-  useEffect(() => {
-    const section = sectionRef.current;
-    if (!section) return;
-
-    const handleWheel = (e: WheelEvent) => {
-      const rect = section.getBoundingClientRect();
-      // Bail if section is completely out of view
-      if (rect.bottom <= 0 || rect.top >= window.innerHeight) return;
-
-      const sectionCenter = rect.top + rect.height / 2;
-      const viewportCenter = window.innerHeight / 2;
-      const distance = sectionCenter - viewportCenter;
-
-      const now = Date.now();
-      if (now - lastWheelTime.current < WHEEL_COOLDOWN) {
-        // Still in cooldown — block the scroll so the page doesn't jump
-        e.preventDefault();
-        return;
-      }
-
-      // If section is partially visible but not centered, snap it to centre first
-      // so the user always sees the full page before the carousel takes over.
-      const CENTER_TOLERANCE = 40;
-      if (Math.abs(distance) > CENTER_TOLERANCE) {
-        e.preventDefault();
-        section.scrollIntoView({ behavior: "smooth", block: "center" });
-        lastWheelTime.current = now;
-        return;
-      }
-
-      // At the boundaries, let the page scroll through naturally
-      if (e.deltaY > 0 && current === SCREENS.length - 1) return;
-      if (e.deltaY < 0 && current === 0) return;
-
-      e.preventDefault();
-      lastWheelTime.current = now;
-      setPaused(true);
-
-      if (e.deltaY > 0) next();
-      else prev();
-    };
-
-    section.addEventListener("wheel", handleWheel, { passive: false });
-    return () => section.removeEventListener("wheel", handleWheel);
-  }, [next, prev, current]);
-
   const screen = SCREENS[current];
 
   return (
     <section
-      ref={sectionRef}
       id="preview"
       className="relative flex min-h-[100dvh] items-center overflow-hidden py-16 md:py-20"
     >
@@ -305,16 +254,6 @@ export function AppPreview() {
               />
             </div>
           </div>
-
-          {/* Scroll hint */}
-          <p className="mt-4 text-[12px] text-ink-400 flex items-center gap-1.5">
-            <svg width="13" height="13" viewBox="0 0 13 13" fill="none" aria-hidden>
-              <rect x="4" y="1" width="5" height="8" rx="2.5" stroke="currentColor" strokeWidth="1.2"/>
-              <line x1="6.5" y1="3" x2="6.5" y2="5" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round"/>
-              <path d="M3 11h7" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round"/>
-            </svg>
-            Scroll over the phone or use arrows to browse
-          </p>
 
           {/* Controls row */}
           <div className="mt-6 flex items-center gap-4">

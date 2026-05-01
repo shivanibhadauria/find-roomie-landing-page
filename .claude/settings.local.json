@@ -9,7 +9,8 @@
       "Bash(grep -o '..\\\\{20\\\\}marquee-track.\\\\{20\\\\}')",
       "Bash(taskkill /PID 11044 /F)",
       "Bash(taskkill /F /IM node.exe)",
-      "PowerShell(Stop-Process *)"
+      "PowerShell(Stop-Process *)",
+      "Bash(npx tsc *)"
     ]
   }
 }
