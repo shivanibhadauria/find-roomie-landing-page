@@ -61,7 +61,9 @@ function StoreButton({
 }) {
   return (
     <a
-      href="#"
+      href="https://drive.google.com/file/d/1yArcnPJJjSe5yDA2SKhKWBvtQwl3tEp4/view?usp=sharing"
+      target="_blank"
+      rel="noopener noreferrer"
       className="group flex items-center gap-3 rounded-2xl bg-white px-5 py-4 btn-tactile hover:bg-white/95"
     >
       <span className="flex h-9 w-9 items-center justify-center rounded-full bg-ink-900 text-white">
