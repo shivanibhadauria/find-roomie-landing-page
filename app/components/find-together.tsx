@@ -40,7 +40,9 @@ export function FindTogether() {
               </dl>
 
               <a
-                href="#download"
+                href="https://drive.google.com/file/d/1yArcnPJJjSe5yDA2SKhKWBvtQwl3tEp4/view?usp=sharing"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="mt-8 inline-flex items-center gap-2 rounded-full bg-ink-900 px-5 py-3 text-[14px] font-medium text-white btn-tactile hover:bg-ink-700"
               >
                 Try Find Together

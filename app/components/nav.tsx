@@ -58,7 +58,9 @@ export function Nav() {
 
         <div className="flex items-center gap-2">
           <a
-            href="#download"
+            href="https://drive.google.com/file/d/1yArcnPJJjSe5yDA2SKhKWBvtQwl3tEp4/view?usp=sharing"
+            target="_blank"
+            rel="noopener noreferrer"
             className="hidden items-center gap-1.5 rounded-full bg-ink-900 px-4 py-2 text-[13px] font-medium text-white btn-tactile hover:bg-ink-700 sm:inline-flex"
           >
             Get the app

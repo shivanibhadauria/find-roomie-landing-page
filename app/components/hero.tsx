@@ -1,5 +1,5 @@
-import { IconArrow, IconCheck, IconShield } from "./icons";
-import { MatchCard } from "./match-card";
+import Image from "next/image";
+import { IconArrow } from "./icons";
 
 export function Hero() {
   return (
@@ -23,7 +23,7 @@ export function Hero() {
               className="h-1.5 w-1.5 rounded-full anim-breathe"
               style={{ background: "var(--verified)" }}
             />
-            Built for Indian cities · Phone-first auth
+            Roommate app · because who you live with matters
           </span>
 
           <h1
@@ -46,9 +46,9 @@ export function Hero() {
             className="anim-rise mt-6 max-w-[52ch] text-[16.5px] leading-relaxed text-ink-500"
             style={{ animationDelay: "0.25s" }}
           >
-            Find Roomie scores every pairing on budget, location, cleanliness,
-            schedule and lifestyle — before you message. No feeds, no swipes on
-            strangers, no phone numbers traded in DMs.
+            Find Roomie rates every potential roommate on 5 real factors —
+            budget, location, cleanliness, schedule, and lifestyle. You see
+            the compatibility score before you ever reach out.
           </p>
 
           <div
@@ -56,7 +56,9 @@ export function Hero() {
             style={{ animationDelay: "0.35s" }}
           >
             <a
-              href="#download"
+              href="https://drive.google.com/file/d/1yArcnPJJjSe5yDA2SKhKWBvtQwl3tEp4/view?usp=sharing"
+              target="_blank"
+              rel="noopener noreferrer"
               className="group inline-flex items-center gap-2 rounded-full bg-ink-900 px-5 py-3 text-[14px] font-medium text-white btn-tactile hover:bg-ink-700"
             >
               Download the app
@@ -77,10 +79,26 @@ export function Hero() {
             className="anim-rise mt-10 grid grid-cols-3 gap-8 border-t border-[color:var(--hairline)] pt-6"
             style={{ animationDelay: "0.5s" }}
           >
-            <Stat value="12,847" label="matches made" />
-            <Stat value="47.2%" label="avg. top-3 score" accent />
-            <Stat value="9 cities" label="live in India" />
+            <Stat value="5" label="match factors scored" />
+            <Stat value="10+" label="cities across India" accent />
+            <Stat value="100%" label="OTP-verified profiles" />
           </div>
+
+          <a
+            href="#preview"
+            className="anim-rise mt-8 inline-flex items-center gap-2 rounded-full px-4 py-2 text-[13px] font-medium transition-all duration-200 hover:shadow-md"
+            style={{
+              animationDelay: "0.6s",
+              background: "var(--accent-wash)",
+              color: "var(--accent-ink)",
+              border: "1px solid rgba(124,111,224,0.25)",
+            }}
+          >
+            <span>See every screen in the app</span>
+            <svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden className="animate-bounce">
+              <path d="M8 3v10M4 9l4 4 4-4" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </a>
         </div>
 
         <div className="relative h-[560px] md:h-[640px]">
@@ -118,70 +136,87 @@ function Stat({
   );
 }
 
+function PhoneFrame({
+  src,
+  alt,
+  className,
+  tilt,
+  delay,
+  priority,
+}: {
+  src: string;
+  alt: string;
+  className: string;
+  tilt: number;
+  delay: string;
+  priority?: boolean;
+}) {
+  return (
+    <div
+      className={`absolute anim-float ${className}`}
+      style={{ animationDelay: delay }}
+    >
+      <div
+        className="anim-rise"
+        style={{
+          animationDelay: delay,
+          transform: `rotate(${tilt}deg)`,
+        }}
+      >
+        <div
+          className="relative overflow-hidden rounded-[32px]"
+          style={{
+            width: 160,
+            height: 356,
+            border: "5px solid #1a1a22",
+            boxShadow:
+              "0 0 0 1px rgba(255,255,255,0.08) inset, 0 32px 72px -12px rgba(17,17,26,0.32)",
+          }}
+        >
+          <Image
+            src={src}
+            alt={alt}
+            fill
+            className="object-cover object-top"
+            sizes="160px"
+            priority={priority}
+          />
+          {/* Dynamic Island */}
+          <div
+            className="absolute left-1/2 top-2 z-10 -translate-x-1/2 rounded-full bg-[#1a1a22]"
+            style={{ width: 56, height: 14 }}
+          />
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function FloatingCards() {
   return (
     <div className="relative h-full w-full">
-      <div className="absolute left-[6%] top-[8%] anim-float" style={{ animationDelay: "0.2s" }}>
-        <MatchCard
-          name="Aanya Chaturvedi"
-          age={26}
-          city="Bengaluru"
-          area="Koramangala 4B"
-          rent="₹18,400"
-          score={92}
-          tone="a"
-          tag="verified"
-          tilt={-4}
-          delay="0.35s"
-        />
-      </div>
-
-      <div
-        className="absolute right-[4%] top-[32%] anim-float"
-        style={{ animationDelay: "0.9s" }}
-      >
-        <MatchCard
-          name="Kabir Shenoy"
-          age={29}
-          city="Mumbai"
-          area="Powai"
-          budget="₹14K–₹22K"
-          score={87}
-          tone="d"
-          tag="together"
-          tilt={5}
-          delay="0.55s"
-        />
-      </div>
-
-      <div
-        className="absolute left-[14%] bottom-[2%] anim-float"
-        style={{ animationDelay: "1.4s" }}
-      >
-        <MatchCard
-          name="Meher Sridharan"
-          age={24}
-          city="Pune"
-          area="Baner"
-          rent="₹11,250"
-          score={78}
-          tone="b"
-          tag="verified"
-          tilt={-2}
-          delay="0.75s"
-        />
-      </div>
-
-      <div
-        className="absolute right-[14%] bottom-[14%] anim-rise rounded-2xl bg-card p-3 hairline diffusion"
-        style={{ animationDelay: "1.1s" }}
-      >
-        <div className="flex items-center gap-2 text-[12px] font-medium text-ink-900">
-          <IconShield size={14} className="text-[color:var(--verified)]" />
-          Aadhaar-verified
-          <IconCheck size={12} className="ml-1 text-[color:var(--verified)]" />
-        </div>
-      </div>
+      <PhoneFrame
+        src="/screen-discover.png"
+        alt="Discover screen"
+        className="left-[4%] top-[4%]"
+        tilt={-5}
+        delay="0.3s"
+        priority
+      />
+      <PhoneFrame
+        src="/screen-profile.png"
+        alt="Profile screen"
+        className="right-[2%] top-[22%]"
+        tilt={6}
+        delay="0.55s"
+      />
+      <PhoneFrame
+        src="/screen-messages.png"
+        alt="Messages screen"
+        className="left-[28%] bottom-[0%]"
+        tilt={-3}
+        delay="0.8s"
+      />
     </div>
   );
 }

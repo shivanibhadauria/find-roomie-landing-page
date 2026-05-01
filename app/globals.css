@@ -47,10 +47,19 @@
     font-feature-settings: "ss01", "cv11";
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+    scroll-snap-type: y proximity;
+    scroll-behavior: smooth;
+  }
+
+  #preview {
+    scroll-snap-align: center;
+    scroll-snap-stop: always;
   }
 
   body {
     min-height: 100dvh;
+    overflow-x: hidden;
   }
 
   ::selection {
@@ -120,6 +129,11 @@
 @keyframes caret {
   0%, 49% { opacity: 1; }
   50%, 100% { opacity: 0; }
+}
+
+@keyframes progress-fill {
+  from { width: 0%; }
+  to   { width: 100%; }
 }
 
 .anim-rise {
