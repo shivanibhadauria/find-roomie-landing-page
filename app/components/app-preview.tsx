@@ -214,7 +214,7 @@ export function AppPreview() {
     <section
       ref={sectionRef}
       id="preview"
-      className="relative overflow-hidden py-24 md:py-32"
+      className="relative flex min-h-[100dvh] items-center overflow-hidden py-16 md:py-20"
     >
       {/* Background */}
       <div
@@ -229,7 +229,7 @@ export function AppPreview() {
       <div className="pointer-events-none absolute -z-10 opacity-30" style={{ bottom: "8%", right: "4%", width: 320, height: 320, borderRadius: "50%", background: "radial-gradient(circle, #a78bfa 0%, transparent 70%)", filter: "blur(80px)" }} aria-hidden />
 
       <div
-        className="mx-auto grid max-w-[1280px] grid-cols-1 items-center gap-16 px-5 md:grid-cols-2 md:gap-20 md:px-8"
+        className="mx-auto grid w-full max-w-[1240px] grid-cols-1 items-center gap-12 px-5 md:grid-cols-[1fr_minmax(0,420px)] md:gap-16 md:px-8"
         onMouseEnter={() => setPaused(true)}
         onMouseLeave={() => setPaused(false)}
       >
